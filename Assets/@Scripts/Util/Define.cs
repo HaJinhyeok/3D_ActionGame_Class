@@ -22,4 +22,14 @@ public class Define
     public const string Enemy = "Enemy";
     public const string Obstacle = "Obstacle";
     #endregion
+
+    #region Enum
+    public enum ItemType : int
+    {
+        None = -1,
+        Equipment, // 장비
+        Countable, // 소비
+        Etc,
+    }
+    #endregion
 }

@@ -15,11 +15,11 @@ public class AttackState : State<GolemController>
     {
         base.OnUpdate(deltaTime);
         context.RotateToTarget();
-        if(!context.Target)
+        if (!context.Target)
         {
             stateMachine.ChangeState<IdleState>();
         }
-        if(!context.IsAvailableAttack)
+        if (!context.IsAvailableAttack)
         {
             stateMachine.ChangeState<MoveState>();
         }

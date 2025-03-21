@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Inventory Inventory;
+
     // * 컴포넌트
     Transform _character;
     Animator _animator;
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
         _character = transform.GetChild(0);
         _animator = _character.GetComponent<Animator>();
         _rigidbody = gameObject.AddComponent<Rigidbody>();
+        _rigidbody.constraints = RigidbodyConstraints.FreezePositionY;
         _rigidbody.freezeRotation = true;
 
         // * 콜라이더
@@ -140,5 +143,15 @@ public class PlayerController : MonoBehaviour
             _mouseY = 0;
 
         _camAxis.rotation = Quaternion.Euler(new Vector3(_camAxis.rotation.x + _mouseY, _camAxis.rotation.y + _mouseX, 0) * _camSpeed);
+    }
+
+    public bool PickUpItem(Item item, int amount = -1)
+    {
+        if (item != null && Inventory.AddItem(item, amount))
+        {
+            Destroy(item.gameObject);
+            return true;
+        }
+        return false;
     }
 }
